@@ -10,9 +10,12 @@ def home():
     if request.method == 'POST':
       f = request.files['file']
       return 'file uploaded successfully'
-    return "hello"
+    return "hello solution challenge"
 
 
 @app.route("/soft-story",methods=['POST','GET'])
 def softStory():
     return "hi"
+
+if __name__ == "__main__":
+   app.run(debug=True)
