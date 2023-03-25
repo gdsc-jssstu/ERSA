@@ -1,23 +1,30 @@
 import React from 'react'
 import { Link } from "react-router-dom";
 import { useState,useEffect } from 'react';
+import axios from 'axios';
 
 
 function SoftStory() {
   const [selectedFile, setSelectedFile] = useState(null);
 
   const handleFileSelect = (event) =>{
-    setSelectedFile(event.target.files[0])
+    setSelectedFile(event.target.files[0]);
   }
 
-  const handleSubmit = async (event) =>{
+  const handleSubmit = (event) =>{
     event.preventDefault();
     const formData = new FormData();
     formData.append('picture', selectedFile)
-    const response = await fetch('http://127.0.0.1:5000/soft-story', {
-      method: 'POST',
-      body: formData
-    })
+      axios.post("http://127.0.0.1:5000/soft-story",
+        formData,
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+          },
+        }
+      )
+      .then((res)=>console.log(res))
+      .catch((err)=>alert(err))
   }
 
   return (
