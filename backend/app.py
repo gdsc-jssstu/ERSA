@@ -1,5 +1,5 @@
 from flask import Flask
-from flask_cors import CORS,cross_origin
+from flask_cors import CORS
 from flask import request
 from flask import jsonify
 from werkzeug.utils import secure_filename
@@ -11,6 +11,8 @@ CORS(app)
 UPLOAD_FOLDER = '/backend/images'
 ALLOWED_EXTENSIONS = {'jpg', 'jpeg', 'png'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+softStorey = False
 
 
 
@@ -28,19 +30,6 @@ def home():
 
 @app.route("/soft-story",methods=['POST'])
 def upload_file():
-    # if 'file' not in request.files:
-    #     return jsonify({'error': 'No file part in the request'}), 400
-
-    # file = request.files['picture']
-    # if file.filename == '':
-    #     return jsonify({'error': 'No file selected for uploading'}), 400
-
-    # if file and allowed_file(file.filename):
-    #     filename = secure_filename(file.filename)
-    #     #file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-    #     return jsonify({'message': 'File uploaded successfully'}), 200
-    # else:
-    #     return jsonify({'error': 'Invalid file type'}), 400
     if 'picture' not in request.files:
         return 'No image uploaded', 400
 
@@ -51,8 +40,13 @@ def upload_file():
     
     #image.save('/path/to/save/image')
     if image and allowed_file(image.filename):
-      #image.save('backend/images')
+      #image = image.save(f'/backend/images/{image.filename}','JPEG')
+      #filename = secure_filename(image.filename)
+      #image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+      
       return 'Image uploaded successfully', 200
+    else:
+      return jsonify({'error': 'Invalid file type'}), 400
 
 
 if __name__ == "__main__":
