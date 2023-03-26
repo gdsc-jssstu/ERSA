@@ -1,0 +1,38 @@
+.nav--main{
+    width: 100%;
+    height: 100px;
+    background-color: #8ea3b6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color:white;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+.nav--sub
+{
+  flex: 1;
+  padding: 10px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.nav--button{
+    background: rgba(133, 148, 163, 0.82);
+    width:140px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: large;
+    font-weight: 600;
+    cursor: pointer;
+    
+  transition: 0.5s;
+}
+.nav--button:hover{
+  background: rgba(92, 98, 104, 0.82);
+}
