@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Navbar from "../components/Navbar";
+import Upload from "../components/Upload";
 
 function SoftStory() {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -26,9 +27,10 @@ function SoftStory() {
   };
 
   return (
-    <div>
+    <>
       <Navbar />
-      <h1>Soft Story Page of ERSA Frontend 🤠</h1>
+      <Upload />
+      {/* <h1>Soft Story Page of ERSA Frontend 🤠</h1>
       <Link to="/">Home</Link>
       <form onSubmit={handleSubmit}>
         <label>
@@ -36,8 +38,8 @@ function SoftStory() {
           <input type="file" onChange={handleFileSelect} />
         </label>
         <button type="submit">Upload</button>
-      </form>
-    </div>
+      </form> */}
+    </>
   );
 }
 
