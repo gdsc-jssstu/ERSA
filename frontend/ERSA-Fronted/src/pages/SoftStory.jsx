@@ -11,19 +11,21 @@ function SoftStory() {
     setSelectedFile(event.target.files[0]);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event) =>{
     event.preventDefault();
     const formData = new FormData();
-    formData.append("picture", selectedFile);
-    axios
-      .post("http://127.0.0.1:5000/soft-story", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
-      .then((res) => console.log(res))
-      .catch((err) => alert(err));
-  };
+    formData.append('picture', selectedFile)
+      axios.post("http://127.0.0.1:5000/soft-story",
+        formData,
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+          },
+        }
+      )
+      .then((res)=>alert(res.data.message))
+      .catch((err)=>alert(err))
+  }
 
   return (
     <div>
