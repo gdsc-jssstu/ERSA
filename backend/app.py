@@ -1,5 +1,5 @@
 from flask import Flask
-from flask_cors import CORS
+from flask_cors import CORS,cross_origin
 from flask import request
 from flask import jsonify
 from werkzeug.utils import secure_filename
@@ -17,7 +17,7 @@ import glob
 from load import *
 
 app = Flask(__name__)
-CORS(app)
+CORS(app,supports_credentials=True)
 
 global model
 
@@ -85,9 +85,10 @@ def upload_file():
       global softStorey
       if(out[0,0] >= 0.6):
           softStorey = True
-          return jsonify({'message':'Your building is soft-storey'})
+          return jsonify({'message':'Your building is soft-storey','bool':softStorey})
       else:
-          return jsonify({'message':'Your building is not a soft-storey'})
+          softStorey=False
+          return jsonify({'message':'Your building is not a soft-storey','bool':softStorey})
 
       return 'Image uploaded successfully', 200
     else:
@@ -99,6 +100,7 @@ def softStoreyFormula():
     #floors = request.args.get('floorData')
     print("hi")
     floorJson = request.get_json()
+    print(floorJson)
     data = floorJson['floors']
     print(data)
     #num_list = [int(num) for num in floors.split(',')]
