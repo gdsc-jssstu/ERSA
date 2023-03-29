@@ -42,5 +42,41 @@ justify-content: center;
 
 .upload--details{
     flex: 4;
-    
+    color: white;
+}
+
+.floor--details{
+    display: flex;
+    flex-direction: column;
+    padding: 10px 5px;
+    align-items: center;
+  justify-content: space-around;
+}
+.floor--input{
+    margin: 10px 0;
+    width: 30%;
+    display: flex;
+    justify-content:space-evenly;
+    align-items: center;
+}
+
+.input--form{
+    background-color: #AEBCC9;
+    color:rgb(50, 50, 50);
+    width:50px;
+    height:25px;
+    border: none;
+    padding: 2px 5px;
+    font-family: 'Poppins';
+    border-radius: 4px;
+}
+.input--form::placeholder{
+    color: #7B7B7B;
+}
+.input--form:focus{
+    outline:2px solid rgb(57, 81, 90);
+}
+button{ transition: all .2s ease-in-out; padding: 5px 10px;   cursor: pointer; background-color: #AEBCC9; border: none; font-family: 'Poppins'; }
+button:hover{
+    transform: scale(1.1);
 }
