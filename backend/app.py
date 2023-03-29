@@ -123,18 +123,18 @@ def softStoreyFormula():
 @app.route('/zone-report',methods=['POST'])
 def zone():
     data = request.get_json()
-    zone = data['zone']
+    zone = float(data['zone'])
 
     #Todo: Get the input of type of building from user and calculate importance factor
-    importance = data['importance']
+    importance = float(data['importance'])
 
     responseReductionFactor = 3 #For ordinary RC buildings
 
 
     soil = data['soil']
-    height = data['height']
+    height = float(data['height'])
 
-    d = data['d']
+    d = float(data['d'])
     
     if zone == 2:
         zone = 0.1
