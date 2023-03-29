@@ -90,7 +90,14 @@ export default function Upload() {
             </div>
           </div>
         </div>
-        <div style={{ textAlign: "Center", marginBottom: "10px" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            textAlign: "Center",
+            marginBottom: "10px",
+          }}
+        >
           <button onClick={handleSubmit}>Submit</button>
         </div>
       </div>
