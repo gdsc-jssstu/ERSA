@@ -3378,4 +3378,4 @@ const DATA = [
    }
 ];
 
-export default DATA;
+export default JSON.stringify(DATA);
