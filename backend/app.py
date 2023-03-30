@@ -17,7 +17,7 @@ import glob
 from load import *
 
 app = Flask(__name__)
-CORS(app,supports_credentials=True)
+CORS(app)
 
 global model
 
@@ -85,7 +85,7 @@ def upload_file():
       global softStorey
       if(out[0,0] >= 0.6):
           softStorey = True
-          return jsonify({'message':'Your building is soft-storey','bool':softStorey})
+          return jsonify({'message':'Your building is soft-story','bool':softStorey})
       else:
           softStorey=False
           return jsonify({'message':'Your building is not a soft-storey','bool':softStorey})
@@ -112,16 +112,16 @@ def softStoreyFormula():
         for i in range(numFloors-1):
             if data[i] < 0.7*data[i+1]:
                 softStorey = True
-                return jsonify({'message':'Your building is a soft-storey','bool':softStorey}), 200
-        return jsonify({'message':'Your building is not a soft-storey','bool':softStorey}), 200
+                return jsonify({'message':'Your building is a soft-story','bool':softStorey}), 200
+        return jsonify({'message':'Your building is not a soft-story','bool':softStorey}), 200
     else:
         for i in range(numFloors-3):
             if data[i] < 0.8*((data[i+1]+data[i+2]+data[i+3])/3):
                 softStorey = True
-                return jsonify({'message':'Your building is a soft-storey','bool':softStorey}), 200
-        return jsonify({'message':'Your building is not a soft-storey','bool':softStorey}), 200
+                return jsonify({'message':'Your building is a soft-story','bool':softStorey}), 200
+        return jsonify({'message':'Your building is not a soft-story','bool':softStorey}), 200
         
-
+@cross_origin()
 @app.route('/zone-report',methods=['POST'])
 def zone():
     data = request.get_json()
@@ -194,18 +194,18 @@ def zone():
 
     if softStorey == True:
         if horizontalAccelerationCoeff < 0.01:
-            return jsonify({'zone':zone,'bool':softStorey,'Ah':horizontalAccelerationCoeff,'message':"Your building is soft storey but even during the earthquake the effect might be less but it is advised to reinforce your building"})
+            return jsonify({'zone':zone,'bool':softStorey,'Ah':horizontalAccelerationCoeff,'message':"Your building is soft story but even during the earthquake the effect might be less but it is advised to reinforce your building"})
         elif horizontalAccelerationCoeff > 0.1:
-            return jsonify({'zone':zone,'bool':softStorey,'Ah':horizontalAccelerationCoeff,'message':"Your building is soft storey the effect of earthquake will be dangerous and it is advised to reinforce your building as soon as possible"})
+            return jsonify({'zone':zone,'bool':softStorey,'Ah':horizontalAccelerationCoeff,'message':"Your building is soft story the effect of earthquake will be dangerous and it is advised to reinforce your building as soon as possible"})
         else:
-            return jsonify({'zone':zone,'bool':softStorey,'Ah':horizontalAccelerationCoeff,'message':"Your building is soft storey and the effect of erathquake will be catastrophic"})
+            return jsonify({'zone':zone,'bool':softStorey,'Ah':horizontalAccelerationCoeff,'message':"Your building is soft story and the effect of erathquake will be catastrophic"})
     else:
         if horizontalAccelerationCoeff < 0.01:
-            return jsonify({'zone':zone,'bool':softStorey,'Ah':horizontalAccelerationCoeff,'message':"Your building is not a soft storey and during the earthquake the effect is less hence you are safe"})
+            return jsonify({'zone':zone,'bool':softStorey,'Ah':horizontalAccelerationCoeff,'message':"Your building is not a soft story and during the earthquake the effect is less hence you are safe"})
         elif horizontalAccelerationCoeff > 0.1:
-            return jsonify({'zone':zone,'bool':softStorey,'Ah':horizontalAccelerationCoeff,'message':"Your building is not a soft storey the effect of earthquake will be moderately dangerous and it is advised to reinforce your building"})
+            return jsonify({'zone':zone,'bool':softStorey,'Ah':horizontalAccelerationCoeff,'message':"Your building is not a soft story the effect of earthquake will be moderately dangerous and it is advised to reinforce your building"})
         else:
-            return jsonify({'zone':zone,'bool':softStorey,'Ah':horizontalAccelerationCoeff,'message':"Your building is not a soft storey but the effect of erathquake will be catastrophic"})
+            return jsonify({'zone':zone,'bool':softStorey,'Ah':horizontalAccelerationCoeff,'message':"Your building is not a soft story but the effect of earthquake will be catastrophic"})
     #return jsonify({'zone':zone,'bool':softStorey,'Ah':horizontalAccelerationCoeff})
 
 if __name__ == "__main__":
