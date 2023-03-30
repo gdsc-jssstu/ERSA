@@ -41,37 +41,19 @@ function ExtensiveAnalysis() {
         /* Handle district soil type  */
         const [soil, setSoil] = useState("");
 
-        // const handleSoilType = (districtName) =>{
-        //   for (let i = 0; i < DATA.length; i++) {
-        //     const district = DATA[i][districtName];
-        //     if (district) {
-        //       setSoil(district[0].soilType);
-        //     }
-        //   }
-        // }
-
         // const handleSoilType = (event) => {
+        //   console.log("handleSoilType called with districtName:", event.target.value);
         //   const districtName = event.target.value;
         //   for (let i = 0; i < DATA.length; i++) {
         //     const district = DATA[i][districtName];
         //     if (district) {
+        //       console.log("found district:", district);
         //       setSoil(district[0].soilType);
+        //       break;
         //     }
         //   }
+        //   console.log("soil state updated to:", soil);
         // };
-        const handleSoilType = (event) => {
-          console.log("handleSoilType called with districtName:", event.target.value);
-          const districtName = event.target.value;
-          for (let i = 0; i < DATA.length; i++) {
-            const district = DATA[i][districtName];
-            if (district) {
-              console.log("found district:", district);
-              setSoil(district[0].soilType);
-              break;
-            }
-          }
-          console.log("soil state updated to:", soil);
-        };
                 
 
         /* Converting Formdata to JSON */
@@ -160,34 +142,37 @@ function ExtensiveAnalysis() {
                                     ))}
                             </select>
                             <div>
-                            {districts.length > 0 && (
+                            {/* {districts.length > 0 && (
                                   <div>
                                     <ul>
                                       <label >Select a District:</label>
-                                      <select name="soil" id="districts" value={soil} onChange={handleSoilType}>
+                                      <select name="soil" id="districts" value={soil}>
                                         <option value="">--Select District--</option>
                                         {districts.map((district) => (
-                                          <option key={district.district_id} value={district.district_name}>{district.district_name}</option>
+                                          <option value={district.district_name}>{district.district_name}</option>
                                         ))}
                                       </select>
                                     </ul>
                                   </div>
-                              )}
-                        </div>
-{/* 
-                            {districts.length > 0 &&
+                              )} */}
+                               {districts.length > 0 &&
                                 <div>
                                 <ul>
                                 <label htmlFor="districts">Select a District:</label>
                                 <select name="soil" id="districts">
+                                {/* <select name="soil" id="districts" value={soil} onChange={handleSoilType}> */}
                                 <option value="">--Select District--</option>
                                     {districts.map((district) => (
                                     <option key={district.district_id} value="soft">{district.district_name}</option>
+
                                     ))}
                                 </select>
                                 </ul>
                                 </div>
-                            } */}
+                            } 
+                        </div>
+
+                           
                     </div>
 
                     <div className="building-height">
@@ -199,7 +184,7 @@ function ExtensiveAnalysis() {
 
                     <div className="dimension">
                         <h1>Dimension</h1>
-                        <p>Please enter dimensions of your building  [ *only if your building is masonry and not RCC, if it is RCC skip this step*]</p>
+                        <p>Please enter dimensions of your building  [ *only if your building is masonry and not RCC, if it is RCC enter 0*]</p>
                         <label for="dimension">Dimension:</label>
                         <input type="number" id="dimension" name="d" step="0.01" min="0"  max="10" />
                     </div>
