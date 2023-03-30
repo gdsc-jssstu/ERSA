@@ -14,10 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/soft-story" element={<SoftStory />} />
-
           <Route path="/report" element={<Report />} />
-          <Route path="/zone" element={<Zone />} />
-
           <Route path="/extensive-analysis" element={<ExtensiveAnalysis />} />
         </Routes>
       </BrowserRouter>
