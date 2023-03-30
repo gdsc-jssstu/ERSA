@@ -1,0 +1,38 @@
+.report--main{
+    color: white;
+    background-color: #7089a1;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    padding: 20px;
+}
+
+.report--title{
+    width: max-content;
+    font-size: xx-large;
+    padding: 25px 0;
+}
+
+
+.report--desc{
+    font-size: large;
+    width: 80%;
+    line-height: 1.5em;
+}
+
+.report--links{
+    margin-top: 100px;
+    padding: 20px 10px;
+    font-size: medium;
+    bottom: 0;
+    border: 2px solid #8CA1B4;
+    background-color:  rgb(72, 72, 73);
+   transition: 0.2s all ease-in;
+   text-decoration: none;
+            color: white;
+}  
+.report--links:hover{
+ background-color: rgb(31, 31, 31);
+}
