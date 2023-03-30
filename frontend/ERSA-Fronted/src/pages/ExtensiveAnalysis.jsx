@@ -3,13 +3,16 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import seismic from '../assets/ref.jpg'
-import '../../public/css/ExtensiveAnalysis.css'
+import './extensive.css'
+import DATA from '../data/data.js'
+import Navbar from '../components/Navbar';
 
 function ExtensiveAnalysis() {
         /*Getting states and districts*/ 
         const [states, setStates] = useState([]);
         const [selectedState, setSelectedState] = useState('');
         const [districts, setDistricts] = useState([]);
+        const [selectedDistrict, setSelectedDistrict] = useState('');
       
         useEffect(() => {
           axios.get('https://cdn-api.co-vin.in/api/v2/admin/location/states')
@@ -33,8 +36,43 @@ function ExtensiveAnalysis() {
         };
 
         /* Generating report */
-        const [report, setReport] = useState("");
+        const [report, setReport] = useState({});
 
+        /* Handle district soil type  */
+        const [soil, setSoil] = useState("");
+
+        // const handleSoilType = (districtName) =>{
+        //   for (let i = 0; i < DATA.length; i++) {
+        //     const district = DATA[i][districtName];
+        //     if (district) {
+        //       setSoil(district[0].soilType);
+        //     }
+        //   }
+        // }
+
+        // const handleSoilType = (event) => {
+        //   const districtName = event.target.value;
+        //   for (let i = 0; i < DATA.length; i++) {
+        //     const district = DATA[i][districtName];
+        //     if (district) {
+        //       setSoil(district[0].soilType);
+        //     }
+        //   }
+        // };
+        const handleSoilType = (event) => {
+          console.log("handleSoilType called with districtName:", event.target.value);
+          const districtName = event.target.value;
+          for (let i = 0; i < DATA.length; i++) {
+            const district = DATA[i][districtName];
+            if (district) {
+              console.log("found district:", district);
+              setSoil(district[0].soilType);
+              break;
+            }
+          }
+          console.log("soil state updated to:", soil);
+        };
+                
 
         /* Converting Formdata to JSON */
         function handleSubmit(event) {
@@ -46,6 +84,7 @@ function ExtensiveAnalysis() {
             for (const [key, value] of formData.entries()) {
               jsonData[key] = value;
             }
+
           
             // send the JSON data to the server
             fetch('http://127.0.0.1:5000/zone-report', {
@@ -63,7 +102,7 @@ function ExtensiveAnalysis() {
             })
             .then(data => {
                 setReport(data);
-                navigate('/report', { state: { reportData: data } });
+                console.log(report);
                 
             })
             .catch(error => {
@@ -74,6 +113,7 @@ function ExtensiveAnalysis() {
 
   return (
     <div>
+        <Navbar />
         <div className="head">
         <h1>Extensive Analysis</h1>
         <p>Please try to provide accurate data as much as possible!</p>
@@ -119,7 +159,22 @@ function ExtensiveAnalysis() {
                                     <option key={state.state_id} value={state.state_id}>{state.state_name}</option>
                                     ))}
                             </select>
-
+                            <div>
+                            {districts.length > 0 && (
+                                  <div>
+                                    <ul>
+                                      <label >Select a District:</label>
+                                      <select name="soil" id="districts" value={soil} onChange={handleSoilType}>
+                                        <option value="">--Select District--</option>
+                                        {districts.map((district) => (
+                                          <option key={district.district_id} value={district.district_name}>{district.district_name}</option>
+                                        ))}
+                                      </select>
+                                    </ul>
+                                  </div>
+                              )}
+                        </div>
+{/* 
                             {districts.length > 0 &&
                                 <div>
                                 <ul>
@@ -132,7 +187,7 @@ function ExtensiveAnalysis() {
                                 </select>
                                 </ul>
                                 </div>
-                            }
+                            } */}
                     </div>
 
                     <div className="building-height">
@@ -150,10 +205,20 @@ function ExtensiveAnalysis() {
                     </div>
 
                     <input type="submit" value="Submit" />
+                    <p>[After filling out all the values, click on Submit to generate conclusion]</p>
 
-                </form>
-            
-        </div>   
+                </form>   
+        </div> 
+        {report.zone && report.message && report.Ah &&
+              <div className="report">
+              <h1>Conclusion</h1>
+              <p>Ah Value : {report.Ah}</p>
+              <p>Zone : {report.zone}</p>
+              <p>Message : {report.message}</p>
+          </div>
+
+        }  
+        
     </div>
   )
 }
