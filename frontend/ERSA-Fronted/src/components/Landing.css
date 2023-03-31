@@ -1,57 +1,174 @@
-.landing--main{
-    min-height: 80vh;
-}
-.bgImg{
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    background-size:cover;
-    background-image:url(../../quake.png);
-    
-}
-
-.description{
-    width: 100%;
-    height: 100%;
-    background-color: rgba(36, 36, 36, 0.352);
-    position: relative;
+/* Hero section container */
+.hero {
     display: flex;
-    flex-direction: column;
-    align-items: start;
-}
-
-.desc--container{
-    position: relative;
-    width: 60%;
-    padding-top:20px;
-    left: 7%;
-}
-
-.header{
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px;
+    color: whitesmoke;
+  }
+  
+  /* Hero content container */
+  .hero__content {
+    flex-basis: 50%;
+    max-width: 50%;
+  }
+  
+  /* Hero title */
+  .hero__title {
+    font-size: 3rem;
+    margin-bottom: 10px;
+  }
+  
+  /* Hero description */
+  .hero__desc {
+    font-size: 1.2rem;
+    margin-bottom: 2.5rem;
+  }
+  
+  /* Hero button */
+  .hero__btn {
+    background-color: #4a4e69;
     color: white;
-    font-size: xx-large;
-    font-weight: 800;
-    word-spacing: 0.05em;
-    margin: 20px 0;
-}
-
-.desc{
-    color: white;
-    font-size: medium;
-    font-weight: 500;
-    margin:10px 0;
-}
-
-.desc>div{
-    margin: 20px 0;
-    line-height: 30px;
-}
-
-.button{
-    font-weight: 300;
-    padding:10px;
-    width: 140px;
-    color: white;
-    background-color: rgba(0, 0, 0, 0.735);
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border-radius: 5px;
     cursor: pointer;
-}
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .hero__btn:hover {
+    transform: scale(1.05);
+    background-color: #3f3f46;
+  }
+  
+  /* Image container */
+  .image {
+    flex-basis: 50%;
+    max-width: 50%;
+    margin-top: 20px;
+  }
+  
+  /* Image */
+  .image img {
+    width: 100%;
+    height: auto;
+  }
+  
+  /* Media query for small screens */
+  @media (max-width: 768px) {
+    /* Hero section container */
+    .hero {
+      flex-direction: column;
+    }
+    
+    /* Hero content container */
+    .hero__content {
+      flex-basis: 100%;
+      max-width: 100%;
+      text-align: center;
+    }
+  
+    /* Image container */
+    .image {
+      flex-basis: 100%;
+      max-width: 100%;
+    }
+  }
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* .landing--main{
+        min-height: 80vh;
+    }
+    .bgImg{
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        background-size:cover;
+        background-image:url(../../quake.png);
+        
+    }
+
+    .description{
+        width: 100%;
+        height: 100%;
+        background-color: rgba(36, 36, 36, 0.352);
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+    }
+
+    .desc--container{
+        position: relative;
+        width: 60%;
+        padding-top:20px;
+        left: 7%;
+    }
+
+    .header{
+        color: white;
+        font-size: xx-large;
+        font-weight: 800;
+        word-spacing: 0.05em;
+        margin: 20px 0;
+    }
+
+    .desc{
+        color: white;
+        font-size: medium;
+        font-weight: 500;
+        margin:10px 0;
+    }
+
+    .desc>div{
+        margin: 20px 0;
+        line-height: 30px;
+    }
+
+    .button{
+        font-weight: 300;
+        padding:10px;
+        width: 140px;
+        color: white;
+        background-color: rgba(0, 0, 0, 0.735);
+        cursor: pointer;
+    } */

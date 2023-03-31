@@ -79,11 +79,9 @@ export default function Upload() {
       <div className="softstory--container">
         <div className="desc">
           <div>Follow these steps to generate report</div>
-          <div>Step 1:</div>
           <div>
-            General description about soft-storey buildings and asking them to
-            upload either image of their buildings or the heights of each
-            floors(recommended)
+            Upload a picture of the structure. The picture should be clear and
+            should contain all the floors.
           </div>
         </div>
         <div className="upload--container" onClick={handleClick}>

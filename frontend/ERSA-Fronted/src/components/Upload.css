@@ -1,8 +1,8 @@
 .softstory--main{
     
-    font-weight: 500;
-    background-color: #7089a1;
+   font-weight: 500;
    min-height: 100vh;
+   color: whitesmoke;
 }
 .softstory--container{
    display: flex;
@@ -15,6 +15,9 @@
 .desc{
     max-width: 80%;
     font-size: large;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 4rem;
 }
 .upload--container{
     width: 80%;
@@ -28,15 +31,20 @@
 .upload--img{
     color: white;
     background-color: #8CA1B4;
-width: 350px;
-height: 350px;
-/* left: 93px;
-top: 492px; */
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-text-align: center;
+    width: 350px;
+    height: 350px;
+    /* left: 93px;
+    top: 492px; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 50%;
+}
+
+.upload--img:hover{
+    background-color: #031349;
 }
 
 .upload--or{
