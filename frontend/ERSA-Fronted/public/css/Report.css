@@ -5,8 +5,7 @@
     align-items: center;
     justify-content: center;
     padding: 20px;
-    min-height: 100vh;
-
+    min-height: 80vh;
 }
 
 .report--title{
@@ -23,16 +22,17 @@
 }
 
 .report--links{
+    border-radius: 5px;
     margin-top: 100px;
     padding: 20px 10px;
     font-size: medium;
     bottom: 0;
-    border: 2px solid #8CA1B4;
-    background-color:  rgb(144, 144, 144);
-   transition: 0.2s all ease-in;
+    background-color: #AEBCC9;
+       transition: 0.2s all ease-out;
    text-decoration: none;
-    color: white;
-}  
+   color:rgb(50, 50, 50);}  
 .report--links:hover{
- background-color: rgb(31, 31, 31);
+    color:white;
+    background-color: blueviolet;
+    transform: scale(1.1);
 }

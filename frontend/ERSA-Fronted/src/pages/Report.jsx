@@ -14,13 +14,9 @@ export default function Report() {
           Your structure is {data ? "a soft story" : "not a soft story"}
         </div>
         <div className="report--desc">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore
-          consectetur repellat laborum aliquid. Nobis fugiat ipsa provident quod
-          magni aperiam vel sunt iusto dolorum, praesentium quam consequuntur
-          quidem quaerat quos? Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Quidem at adipisci accusamus totam ducimus iusto
-          aut. Laborum pariatur minus fugiat libero voluptas? Maiores quia nemo
-          blanditiis doloremque quasi dignissimos non. `
+          {data
+            ? "According to our analysis, your building is a soft story. This means that your building could be structurally susceptible to damage. Fret not, for there are retrofitting measures which can be taken to strengthen your building and prevent any damage. Take our extensive analysis to find out more."
+            : "According to our analysis, your building is not a soft story. This means that your building is structurally sound and stable. However, this does not completely mitigate the risk of earthquakes on your building, as the zone you reside in may be susceptible to earthquakes. Find out more using our extensive analysis."}
         </div>
 
         <Link className="report--links" to="/extensive-analysis">
