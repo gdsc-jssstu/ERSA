@@ -20,13 +20,14 @@ export default function Landing() {
   return (
       <div className="hero">
         <div className="hero__content">
-          <h1 className="hero__title">Lorem ipsum dolor ?</h1>
+          <h1 className="hero__title">What is ERSA?</h1>
           <p className="hero__desc">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-            condimentum, nisl ut ultricies lacinia, nunc nisl aliquam nisl, ut
-          </p>
+          ERSA stands for Earthquake Resilient Structure Analysis.<br/><br/>
+          Lately, we have been seeing news of earthquakes and their devastation. Wouldn't it be helpful
+for everyone if they could have an understanding of the structural integrity of their buildings
+and possible ways to retrofit them? This is what ERSA aims to achieve          </p>
           <Link to="/soft-story" style={{ textDecoration: "none" }}>
-            <button className="hero__btn">Analayse Now</button>
+            <button className="hero__btn">Analyse Now</button>
           </Link>
           </div>
           <div className="image">
@@ -34,6 +35,7 @@ export default function Landing() {
           </div>
           <Particles
             id="tsparticles"
+            style={{top:'80px',zIndex:1}}
             init={particlesInit}
             loaded={particlesLoaded}
             options={{
@@ -57,7 +59,7 @@ export default function Landing() {
                         },
                         repulse: {
                             distance: 200,
-                            duration: 0.4,
+                            duration: 0.2,
                         },
                     },
                 },
@@ -67,7 +69,7 @@ export default function Landing() {
                     },
                     links: {
                         color: "#ffffff",
-                        distance: 70,
+                        distance: 40,
                         enable: true,
                         opacity: 0.5,
                         width: 1,
@@ -82,15 +84,15 @@ export default function Landing() {
                             default: "bounce",
                         },
                         random: false,
-                        speed: 2,
+                        speed: 1,
                         straight: true,
                     },
                     number: {
                         density: {
                             enable: true,
-                            area: 800,
+                            area: 500,
                         },
-                        value: 80,
+                        value: 50,
                     },
                     opacity: {
                         value: 0.5,
@@ -99,7 +101,7 @@ export default function Landing() {
                         type: "circle",
                     },
                     size: {
-                        value: { min: 1, max: 5 },
+                        value: { min: 1, max: 3 },
                     },
                 },
                 detectRetina: true,

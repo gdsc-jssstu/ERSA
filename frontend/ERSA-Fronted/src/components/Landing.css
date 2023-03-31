@@ -5,6 +5,7 @@
     align-items: center;
     padding: 40px;
     color: whitesmoke;
+    top:80px;
   }
 
   /* Hero content container */
@@ -21,12 +22,15 @@
 
   /* Hero description */
   .hero__desc {
-    font-size: 1.2rem;
+    line-height: 1.4em;
+    font-size: 1.4rem;
     margin-bottom: 2.5rem;
   }
 
   /* Hero button */
   .hero__btn {
+    
+    font-family:inherit;
     background-color: #4a4e69;
     color: white;
     border: none;
@@ -49,12 +53,14 @@
     margin-top: 20px;
   }
 
+
   /* Image */
   .image img {
     width: 100%;
     height: auto;
   }
 
+ 
   /* Media query for small screens */
   @media (max-width: 768px) {
     /* Hero section container */

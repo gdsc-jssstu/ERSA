@@ -30,7 +30,7 @@
  }
  .upload--img{
      color: white;
-     background-color: #8CA1B4;
+       background-color: rgba(99, 101, 99, 0.6);
      width: 350px;
      height: 350px;
      /* left: 93px;
@@ -41,38 +41,28 @@
      justify-content: center;
      text-align: center;
      border-radius: 50%;
+     border: 5px dashed;
  }
  
  .upload--img:hover{
-     background-color: #031349;
+     background-color: rgba(167, 168, 167, 0.6);
  }
- 
- .upload--or{
-     color: white;
-     text-align: center;
-     flex:2;
- }
- 
  .upload--details{
      flex: 4;
      color: white;
  }
- 
- .floor--details{
-     width: 100%;
-     display: flex;
-     flex-direction: column;
-     padding: 10px 5px;
-     align-items: center;
-   justify-content: space-around;
+
+ button{
+        background-color: #AEBCC9;
+        color:rgb(50, 50, 50);
+        width: 100px;
+        height: 40px;
+        border: none;
+        padding: 2px 5px;
+        font-family: 'Poppins';
+        border-radius: 8px;
  }
- .floor--input{
-     margin: 10px 0;
-     width: 50%;
-     display: flex;
-     justify-content:space-evenly;
-     align-items: center;
- }
+
  
  .input--form{
      background-color: #AEBCC9;
@@ -90,7 +80,7 @@
  .input--form:focus{
      outline:2px solid rgb(57, 81, 90);
  }
- button{ transition: all .2s ease-in-out; padding: 5px 10px;  cursor: pointer; background-color: #AEBCC9; border: none; font-family: 'Poppins'; }
+ button{font-family: 'Poppins'; transition: all .2s ease-in-out; padding: 5px 10px;  cursor: pointer; background-color: #AEBCC9; border: none; font-family: 'Poppins'; }
  button:hover{
      transform: scale(1.1);
  }
