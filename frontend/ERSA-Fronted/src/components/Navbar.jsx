@@ -6,7 +6,7 @@ export default function Navbar() {
     <div className="nav--main">
       <div className="nav--sub">
         <div style={{ fontWeight: "bold", fontSize: "xx-large" }}>
-          <Link to="/" style={{ color: "white", textDecoration: "none" }}>
+          <Link to="/" style={{color:"white",letterSpacing:3,textShadow:'2px 4px 5px rgba(68,10,93,0.6)', textDecoration: "none" }}>
             ERSA
           </Link>
         </div>
