@@ -104,6 +104,7 @@ function ExtensiveAnalysis() {
   return (
     <div>
       <Navbar />
+      <div className="container">
       <div className="head">
         <h1>Extensive Analysis</h1>
         <p>Please try to provide accurate data as much as possible!</p>
@@ -232,6 +233,7 @@ function ExtensiveAnalysis() {
           <p>Message : {report.message}</p>
         </div>
       )}
+    </div>
     </div>
   );
 }
