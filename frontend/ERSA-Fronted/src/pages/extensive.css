@@ -1,85 +1,90 @@
 .head {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .head h1 {
-    font-size: 30px;
-    margin-bottom: 5px;
-  }
-  
-  .head p {
-    font-size: 16px;
-  }
-  
-  .map img {
-    width: 100%;
-    max-width: 500px;
-    display: block;
-    margin: 0 auto;
-  }
-  
-  form {
-    max-width: 700px;
-    margin: 0 auto;
-  }
-  
-  form h1 {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  
-  form p {
-    font-size: 16px;
-    margin-bottom: 10px;
-  }
-  
-  form label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  form select,
-  form input[type="number"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 20px;
-  }
-  
-  form select option[value="0"] {
-    display: none;
-  }
-  
-  form input[type="submit"] {
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease-in-out;
-  }
-  
-  form input[type="submit"]:hover {
-    background-color: #0062cc;
-  }
+  text-align: center;
+  margin-bottom: 20px;
+  background-color: whitesmoke;
+  margin-left: 5rem;
+  margin-right: 5rem;
+}
+
+.Extensive-info{
+  background-color: whitesmoke;
+}
+
+.head h1 {
+  font-size: 30px;
+  margin-bottom: 5px;
+}
+
+.head p {
+  font-size: 16px;
+}
+
+.map img {
+  width: 100%;
+  max-width: 500px;
+  display: block;
+  margin: 0 auto;
+}
+
+form {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+form h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+form p {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+form label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+form select,
+form input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+form select option[value="0"] {
+  display: none;
+}
+
+form input[type="submit"] {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+form input[type="submit"]:hover {
+  background-color: #0062cc;
+}
 
 .report{
-    max-width: 700px;
-    margin: 0 auto;
-  }
-  
-  .report h1 {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  
-  .report p {
-    font-size: 16px;
-    margin-bottom: 10px;
-  }
-  
-  
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.report h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.report p {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
