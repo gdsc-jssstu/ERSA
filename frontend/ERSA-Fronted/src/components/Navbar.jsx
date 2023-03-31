@@ -7,11 +7,8 @@ export default function Navbar() {
       <div className="nav--sub">
         <div style={{ fontWeight: "bold", fontSize: "xx-large" }}>
           <Link to="/" style={{ color: "white", textDecoration: "none" }}>
-            E R S A
+            ERSA
           </Link>
-        </div>
-        <div>
-          <div className="nav--button">Know More</div>
         </div>
       </div>
     </div>

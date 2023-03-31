@@ -219,10 +219,8 @@ function ExtensiveAnalysis() {
             />
           </div>
 
-          <input type="submit" value="Submit" />
+          <input type="submit" value="Generate report" />
           <p>
-            [After filling out all the values, click on Submit to generate
-            conclusion]
           </p>
         </form>
       </div>
