@@ -9,7 +9,7 @@
 - Manusreshta B L
 
 ### What is ERSA?
-ERSA stands for Earthquake Resistant Structure Analysis. The main aim of ERSA is to
+ERSA stands for Earthquake Resilient Structure Analysis. The main aim of ERSA is to
 determine the structural integrity of buildings, and hence provide means to increase it and take
 further action.
 
