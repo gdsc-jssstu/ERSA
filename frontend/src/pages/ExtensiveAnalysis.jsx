@@ -39,33 +39,17 @@ function ExtensiveAnalysis() {
       });
   };
 
-  /* Generating report */
-  const [report, setReport] = useState({});
 
   /* Handle district soil type  */
   const [soil, setSoil] = useState("");
 
-  // const handleSoilType = (event) => {
-  //   console.log("handleSoilType called with districtName:", event.target.value);
-  //   const districtName = event.target.value;
-  //   for (let i = 0; i < DATA.length; i++) {
-  //     const district = DATA[i][districtName];
-  //     if (district) {
-  //       console.log("found district:", district);
-  //       setSoil(district[0].soilType);
-  //       break;
-  //     }
-  //   }
-  //   console.log("soil state updated to:", soil);
-  // };
-
   /* Converting Formdata to JSON */
   function handleSubmit(event) {
     event.preventDefault();
-    const formData = new FormData(event.target); // get the form data
+    const formData = new FormData(event.target); // getting the form data
     const jsonData = {}; // creating an empty object to store the JSON data
 
-    // loop through the form data and add each field to the JSON object
+    // looping through the form data and add each field to the JSON object
     for (const [key, value] of formData.entries()) {
       jsonData[key] = value;
     }
@@ -157,25 +141,11 @@ function ExtensiveAnalysis() {
               ))}
             </select>
             <div>
-              {/* {districts.length > 0 && (
-                                  <div>
-                                    <ul>
-                                      <label >Select a District:</label>
-                                      <select name="soil" id="districts" value={soil}>
-                                        <option value="">--Select District--</option>
-                                        {districts.map((district) => (
-                                          <option value={district.district_name}>{district.district_name}</option>
-                                        ))}
-                                      </select>
-                                    </ul>
-                                  </div>
-                              )} */}
               {districts.length > 0 && (
                 <div>
                   <ul>
                     <label htmlFor="districts">Select a District:</label>
                     <select name="soil" id="districts">
-                      {/* <select name="soil" id="districts" value={soil} onChange={handleSoilType}> */}
                       <option value="">--Select District--</option>
                       {districts.map((district) => (
                         <option key={district.district_id} value="soft">
