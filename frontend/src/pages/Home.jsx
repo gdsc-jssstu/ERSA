@@ -9,8 +9,6 @@ function Home() {
     <div>
       <Navbar />
       <Landing />
-      {/*{ <h1>Home Page of ERSA Frontend 🐧</h1>
-      <Link to="/soft-story">Soft Story</Link>}*/}
     </div>
   );
 }
