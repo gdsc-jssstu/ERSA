@@ -3,12 +3,8 @@ from flask_cors import CORS,cross_origin
 from flask import request
 from flask import jsonify
 from werkzeug.utils import secure_filename
-#from scipy.misc import imresize, imread
-#from skimage.transform import resize
 import base64
 import numpy as np
-# import tensorflow as tf
-#import keras.models
 import cv2
 import re
 import sys
@@ -17,128 +13,91 @@ import glob
 from load import *
 
 app = Flask(__name__)
+
+#Cross origin resource sharing
 CORS(app)
 
 global model
 
 model = init()
 
+#Constants and global variables
 UPLOAD_FOLDER = 'images'
 ALLOWED_EXTENSIONS = {'jpg', 'jpeg', 'png'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
 softStorey = False
 
+#Method to check the file type
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-def convertImage(imgData1):
-	imgstr = re.search(b'base64,(.*)',imgData1).group(1)
-	with open('output.png','wb') as output:
-	    output.write(base64.b64decode(imgstr))
-
-@app.route("/",methods=['POST','GET'])
-def home():
-    if request.method == 'POST':
-      f = request.files['file']
-      return 'file uploaded successfully'
-    return "hello solution challenge"
-
-
+#soft-storey route for image classification
 @app.route("/soft-story",methods=['POST'])
 def upload_file():
+    #Check if the picture is uploaded or not
     if 'picture' not in request.files:
         return 'No image uploaded', 400
-
+    #Get the uploaded image
     image = request.files['picture']
-
+    
     if image.filename == '':
         return jsonify({'error': 'No file selected for uploading'}), 400
     
-    #image.save('/path/to/save/image')
+    #Check if the image is of the correct format
     if image and allowed_file(image.filename):
-      #image = image.save(f'/backend/images/{image.filename}','JPEG')
+	#Store the image locally
       filename = secure_filename(image.filename)
       image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-      #image = image.read()
-      #resize(image, (100, 100))
-      #image = image.reshape(256, 256, 3)
-      #convertImage(image)
-      #x = imread('output.png',mode='L')
-      #x = np.invert(x)
-      # x = imresize(x,(28,28))
-      #x = x.reshape(1,28,28,1)
-      #for img in glob.glob('images'+image.filename):
-      #imageName = glob.glob('images'+image.filename)
+	
+	#Resize the image to fit to 256/256 for image classifire
       new_image = cv2.imread('images/'+image.filename)
       imResized = cv2.resize(new_image,(256,256))
-      #img = cv2.imread(, cv2.IMREAD_COLOR)
-      # print(imResized)
       imResized = imResized/255.0
-      print(imResized.shape)
-      #res = cv2.resize(img, dsize=(255, 255))
-      #imResized = imResized.reshape(256,256,3)
       imResized=imResized[None,:,:,:]
+	
+	#Predict whether the building is soft-storey or not my using the model
       out = model.predict(imResized)
-      print(out)
+
       global softStorey
+	#Check if the predicted value is greater than 0.6, if so then it is a soft-storey, else it is not
       if(out[0,0] >= 0.6):
           softStorey = True
-          return jsonify({'message':'Your building is soft-story','bool':softStorey})
+          return jsonify({'message':'Your building is soft-story','bool':softStorey}), 200
       else:
           softStorey=False
-          return jsonify({'message':'Your building is not a soft-storey','bool':softStorey})
+          return jsonify({'message':'Your building is not a soft-storey','bool':softStorey}), 200
 
       return 'Image uploaded successfully', 200
     else:
       return jsonify({'error': 'Invalid file type'}), 400
 
 
-@app.route('/soft-storey-floors',methods=["POST"])
-def softStoreyFormula():
-    #floors = request.args.get('floorData')
-    print("hi")
-    floorJson = request.get_json()
-    print(floorJson)
-    data = floorJson['floors']
-    print(data)
-    #num_list = [int(num) for num in floors.split(',')]
-    numFloors = len(data)
-    global softStorey
-    if numFloors < 2:
-        return jsonify({'error':'If number of floors is less please use the image'}), 400
-    elif numFloors <= 3:
-        for i in range(numFloors-1):
-            if data[i] < 0.7*data[i+1]:
-                softStorey = True
-                return jsonify({'message':'Your building is a soft-story','bool':softStorey}), 200
-        return jsonify({'message':'Your building is not a soft-story','bool':softStorey}), 200
-    else:
-        for i in range(numFloors-3):
-            if data[i] < 0.8*((data[i+1]+data[i+2]+data[i+3])/3):
-                softStorey = True
-                return jsonify({'message':'Your building is a soft-story','bool':softStorey}), 200
-        return jsonify({'message':'Your building is not a soft-story','bool':softStorey}), 200
-        
+#zone-report route for extensive analysis        
 @cross_origin()
 @app.route('/zone-report',methods=['POST'])
 def zone():
+	#Get the data from the request
     data = request.get_json()
+
+	#zone value (2-5)
     zone = float(data['zone'])
 
-    #Todo: Get the input of type of building from user and calculate importance factor
+    #iportance factor (1 or 1.5)
     importance = float(data['importance'])
 
     responseReductionFactor = 3 #For ordinary RC buildings
 
-
+	#Type of soil (soft, hard, moderate)
     soil = data['soil']
-    height = float(data['height'])
-    print(height)
 
+	#height of building in meters
+    height = float(data['height'])
+
+	#Dimensions of the building
     d = float(data['d'])
-    print(d)
+
+	#assigning zone value based on the zone type
     if zone == 2:
         zoneVal = 0.1
     elif zone == 3:
@@ -151,14 +110,16 @@ def zone():
         zoneVal = 0
 
 
+	#Calculating time period
     if d == 0:
         T = 0.075 * (height ** 0.75)
     else:
         T = 0.09*height/(d**(0.5))
 
-    print(T)
+
     global softStorey
 
+	#Calculating S based on tie period and soil type
     if T <= 0.1:
         S = 1 + 15 * T
     else:
@@ -186,28 +147,26 @@ def zone():
       else:
           S = 1
 
-    print(soil)
-    print(S)
 
-
+	#Calculating horizontal acceleration coefficient 
     horizontalAccelerationCoeff = ((zoneVal*importance)/(responseReductionFactor*2))*S
     print(horizontalAccelerationCoeff)
 
+	#logic to give extensive analysis to the user
     if softStorey == True:
         if horizontalAccelerationCoeff < 0.1:
-            return jsonify({'zone':zone,'bool':softStorey,'Ah':horizontalAccelerationCoeff,'message':"Your building is soft story but even during the earthquake the effect might be less but it is advised to reinforce your building"})
+            return jsonify({'zone':zone,'bool':softStorey,'Ah':horizontalAccelerationCoeff,'message':"Your building is soft story but even during the earthquake the effect might be less but it is advised to reinforce your building"}), 200
         elif horizontalAccelerationCoeff >= 0.1:
-            return jsonify({'zone':zone,'bool':softStorey,'Ah':horizontalAccelerationCoeff,'message':"Your building is soft story the effect of earthquake will be dangerous and it is advised to reinforce your building as soon as possible"})
+            return jsonify({'zone':zone,'bool':softStorey,'Ah':horizontalAccelerationCoeff,'message':"Your building is soft story the effect of earthquake will be dangerous and it is advised to reinforce your building as soon as possible"}), 200
         else:
-            return jsonify({'zone':zone,'bool':softStorey,'Ah':horizontalAccelerationCoeff,'message':"Your building is soft story and the effect of erathquake will be catastrophic"})
+            return jsonify({'zone':zone,'bool':softStorey,'Ah':horizontalAccelerationCoeff,'message':"Your building is soft story and the effect of erathquake will be catastrophic"}), 200
     else:
         if horizontalAccelerationCoeff < 0.1:
-            return jsonify({'zone':zone,'bool':softStorey,'Ah':horizontalAccelerationCoeff,'message':"Your building is not a soft story and during the earthquake the effect is less hence you are safe"})
+            return jsonify({'zone':zone,'bool':softStorey,'Ah':horizontalAccelerationCoeff,'message':"Your building is not a soft story and during the earthquake the effect is less hence you are safe"}), 200
         elif horizontalAccelerationCoeff >= 0.1:
-            return jsonify({'zone':zone,'bool':softStorey,'Ah':horizontalAccelerationCoeff,'message':"Your building is not a soft story the effect of earthquake will be moderately dangerous and it is advised to reinforce your building"})
+            return jsonify({'zone':zone,'bool':softStorey,'Ah':horizontalAccelerationCoeff,'message':"Your building is not a soft story the effect of earthquake will be moderately dangerous and it is advised to reinforce your building"}), 200
         else:
-            return jsonify({'zone':zone,'bool':softStorey,'Ah':horizontalAccelerationCoeff,'message':"Your building is not a soft story but the effect of earthquake will be catastrophic"})
-    #return jsonify({'zone':zone,'bool':softStorey,'Ah':horizontalAccelerationCoeff})
+            return jsonify({'zone':zone,'bool':softStorey,'Ah':horizontalAccelerationCoeff,'message':"Your building is not a soft story but the effect of earthquake will be catastrophic"}), 200
 
 if __name__ == "__main__":
    app.run(debug=True)
