@@ -6,7 +6,7 @@
 - Abhilash Hathwar
 - Bhuvan Chandra Koduru
 - Srivatsa Joshi
-- Manusreshta B L
+- Manushreshta B L
 
 ### What is ERSA?
 ERSA stands for Earthquake Resilient Structure Analysis. The main aim of ERSA is to
